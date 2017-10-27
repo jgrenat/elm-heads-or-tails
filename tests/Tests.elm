@@ -1,22 +1,31 @@
 module Tests exposing (..)
 
+import Main exposing (CoinState(Heads, Tails), GameState(Loss, Win), Model(..), Msg(CoinFlipped, FlipCoin, PlayerBet), randomCoin, update, view)
 import Test exposing (..)
+import Test.Html.Query as Query
 import Expect
+import Random
+import Test.Html.Selector exposing (text)
 
 
--- Check out http://package.elm-lang.org/packages/elm-community/elm-test/latest to learn more about testing in Elm!
+modelGameHead : Model
+modelGameHead =
+    Game Heads
 
 
 all : Test
 all =
-    describe "A Test Suite"
-        [ test "Addition" <|
+    describe "Heads or Tails"
+        [ test "Guessing the correct answer should make the player win" <|
             \_ ->
-                Expect.equal 10 (3 + 7)
-        , test "String.left" <|
+                Expect.equal (update (PlayerBet Heads) modelGameHead) ( Result Win, Cmd.none )
+        , test "Guessing the wrong answer should make the player lose" <|
             \_ ->
-                Expect.equal "a" (String.left 1 "abcdefg")
-        , test "This test should fail" <|
+                Expect.equal (update (PlayerBet Tails) modelGameHead) ( Result Loss, Cmd.none )
+        , test "Having winned a game should display a congratulation message" <|
             \_ ->
-                Expect.fail "failed as expected!"
+                view (Result Win) |> Query.fromHtml |> Query.has [ text "Congrats, you were right!" ]
+        , test "Having lost a game should display a message full of disappointment" <|
+            \_ ->
+                view (Result Loss) |> Query.fromHtml |> Query.has [ text "You failed..." ]
         ]

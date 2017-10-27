@@ -14,10 +14,10 @@ main =
 type Model
     = NoGame
     | Game CoinState
-    | Result GameStart
+    | Result GameState
 
 
-type GameStart
+type GameState
     = Win
     | Loss
 
@@ -89,7 +89,7 @@ view model =
             let
                 result =
                     if state == Win then
-                        "Congrat's, you were right!"
+                        "Congrats, you were right!"
                     else
                         "You failed..."
             in
