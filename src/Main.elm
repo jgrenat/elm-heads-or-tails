@@ -1,12 +1,13 @@
-module Main exposing (..)
+module Main exposing (Model(..), Msg(..), init, main, startGameButton, update, view)
 
-import Html exposing (Html, button, div, program, text)
+import Html exposing (Html, button, div, text)
+import Browser exposing (element)
 import Html.Attributes exposing (class)
 
 
-main : Program Never Model Msg
+main : Program () Model Msg
 main =
-    program { init = init, view = view, update = update, subscriptions = (\m -> Sub.none) }
+    element { init = (\a -> init), view = view, update = update, subscriptions = \m -> Sub.none }
 
 
 type Model
