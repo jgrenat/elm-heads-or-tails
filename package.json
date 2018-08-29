@@ -1,0 +1,31 @@
+{
+  "name": "elm-heads-or-tails",
+  "version": "1.0.0",
+  "description": "Simple coin flipping game made for my conference on Elm.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "copy": "^0.3.2",
+    "elm": "^0.19.0-bugfix2",
+    "elm-live": "^3.0.1",
+    "surge": "^0.20.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "elm-live ./src/Main.elm --debug --dir=./build --output=build/elm.js --before-build='./copy-assets.sh'",
+    "copy:assets": "cpy 'public/*' build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgrenat/elm-heads-or-tails.git"
+  },
+  "author": "jgrenat",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jgrenat/elm-heads-or-tails/issues"
+  },
+  "homepage": "https://github.com/jgrenat/elm-heads-or-tails#readme"
+}
